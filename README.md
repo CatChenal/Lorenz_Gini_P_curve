@@ -1,9 +1,4 @@
 
-
-```python
-from IPython.display import Markdown, HTML, Image
-```
-
 # LGP: the Lorenz-Gini-P curve
 
 
@@ -14,7 +9,7 @@ It is therefore, a square plot with (0,1) ranges.
 
 To reproduce the "augmented" Lorenz curve (Figure 2) in this paper by Kunegis and Preusse, "Fairness on the Web: Alternatives to the Power Law" in *WebSci* 2012, June 22–24, 2012, Evanston, Illinois, USA::  
 
-![Figure2](../images/LorenzGiniP_Figure2.png)
+![Figure2](./images/LorenzGiniP_Figure2.png)
 > Figure 2. Statistics associated with the Pareto principle. [...]The Lorenz curve (continuous line) gives rise to two statistics: The Gini coefficient G is twice the gray area and the balanced inequality ratio P is the point at which the antidiagonal crosses the Lorenz curve.
 
 
@@ -35,16 +30,16 @@ Since A+B = 0.5, **G = 2A**
 ## Examplar output of the function `LorenzGiniP.plot_lorenz_GP()`:
 
 ## Gini = 0% when the distributions are identical:  
-![Gini0](./Lorenz_Gini0.png)
+![Gini0](./notebooks/Lorenz_Gini0.png)
 
 ## Gini = 100% when the distributions are extremely skewed: 
-![alt text](./Lorenz_Gini100.png)
+![alt text](./notebooks/Lorenz_Gini100.png)
 
 ## Gini = intermedate in other cases: 
-![alt text](./Lorenz_Gini.png)
+![alt text](./notebooks/Lorenz_Gini.png)
 
 ## This last plot was created from two cumulative series in a Pandas DataFrame:
-![alt text](./Lorenz_Gini_pandas.png)
+![alt text](./notebooks/Lorenz_Gini_pandas.png)
 
 ### Hope this helps!
 

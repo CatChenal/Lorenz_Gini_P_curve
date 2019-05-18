@@ -21,6 +21,9 @@ from matplotlib import lines
 from matplotlib.ticker import PercentFormatter
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DIR_IMG = os.path.join(os.path.dirname(BASE_DIR), 'images')
+    
 def findIntersection(sx, arr1, arr2, ax=None, c='red'):
     """
     Graphical approach to finding intersecting points (candidates)
@@ -142,9 +145,11 @@ def plot_lorenz_GP(xlor, ylor,
     
     if show_caption:
         # Create a "narrative" to use as caption:
-        s = '\n{:.1%} of {} '.format(Py, x_pop)
-        s += 'accounts for {:.1%}\n of the {}.'.format(Px, y_measure)
-        ax.text(0.5, -0.2, s, ha='center',va='center', fontsize=12);
+        s = '{:.1%} of {}\n'.format(Py, x_pop)
+        s += 'accounts for\n{:.1%} of the {}.'.format(Px, y_measure)
+        ax.text(0.47, 0.96, s, 
+                ha='center',va='center',
+                style='italic', fontsize=11, wrap=True);
             
     ax.xaxis.set_major_formatter(PercentFormatter(1))
     ax.yaxis.set_major_formatter(PercentFormatter(1))
@@ -154,17 +159,19 @@ def plot_lorenz_GP(xlor, ylor,
     ax.set_ylabel('Cummuative share of {}'.format(y_measure))
     
     if save_as:
-        fname = os.path.basename(save_as).split('.')[0] + '.' + format
+        pic = os.path.basename(save_as).split('.')[0] + '.' + format
+        fname = os.path.join(DIR_IMG, pic)
         plt.savefig(fname, transparent=True)
 
 
 def save_file(fname, ext, s, replace=True):
     # check if fname has an extension:
-    try:
-        i = fname.index('.' , -6)
-        outfile = fname[:i] + '.' + 'json'
-    except:
-        outfile = fname + '.' + 'json'
+    x = get_file_ext(fname)
+    
+    if x:
+        outfile = fname.split(x)[0] + '.' + ext
+    else:
+        outfile = fname + '.' + ext
     
     if replace:
         if os.path.exists(outfile):
@@ -173,8 +180,8 @@ def save_file(fname, ext, s, replace=True):
     if isinstance(s, dict):
         import json
 
-        with open(outfile, 'w') as f:
-            f.write(json.dumps(s))
+        with open(outfile, 'w') as fw:
+            json.dump(s, fw)
     else:
         if len(s):
             with open(outfile, 'w') as f:

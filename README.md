@@ -43,4 +43,6 @@ Since A+B = 0.5, **G = 2A**
 
 ### Hope this helps!
 
-#### TODO: Refine plotting function to enable args as style dicts for plot text and figure save options.
+#### TODO: 
+* Refine plotting function to enable args as style dicts for plot text and figure save options.
+* Increase fig heigth to  prevent croping of caption.

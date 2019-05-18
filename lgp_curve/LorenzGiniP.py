@@ -92,7 +92,7 @@ def plot_lorenz_GP(xlor, ylor,
     N = xlor.size
     if N != ylor.size:
         msg = "The input series must have the same length;"
-        msg += "\Given: xlor: {}, ylor: {}.".format(sx,sy)
+        msg += "\nGiven: xlor: {}, ylor: {}.".format(sx,sy)
         raise ValueError(msg)
      
     # check2:
@@ -102,7 +102,7 @@ def plot_lorenz_GP(xlor, ylor,
         msg += " e.g. xlor = x.cumsum()/x.sum()."
         raise TypeError(msg)
         
-    if not y_measure: y_measure = 'income';
+    if not y_measure: y_measure = 'income'
     
     if figw <= 0: figw = 5
     fig = plt.figure(figsize=(figw + 1, figw))
@@ -116,8 +116,8 @@ def plot_lorenz_GP(xlor, ylor,
     ax.grid(True, alpha=alfa - 0.3)
 
     # fill the area between diag, the equality line, and the curve:
-    area = plt.fill_between(xlor, xlor, ylor, 
-                            color='pink', alpha=alfa - 0.2)
+    plt.fill_between(xlor, xlor, ylor, 
+                     color='pink', alpha=alfa - 0.2)
 
     # Get the gini coef from the fill area, G = 2A.
     twiceA = 1 - 2*np.trapz(ylor, x=xlor)
@@ -131,10 +131,10 @@ def plot_lorenz_GP(xlor, ylor,
     dx = np.linspace(0.0, 1.0, Ndx)
     y_anti = 1 - dx 
     
-    diag = lines.Line2D(dx, dx, c='green', linestyle='dotted', alpha=alfa);
-    anti = lines.Line2D(dx, y_anti, c='grey', linestyle='dotted', alpha=alfa);
-    ax.add_line(diag);
-    ax.add_line(anti);
+    diag = lines.Line2D(dx, dx, c='green', linestyle='dotted', alpha=alfa)
+    anti = lines.Line2D(dx, y_anti, c='grey', linestyle='dotted', alpha=alfa)
+    ax.add_line(diag)
+    ax.add_line(anti)
     
     # Get the 'balanced inequality ratio', the intersection P of the Lorenz
     # curve with the antidiagonal;
@@ -149,12 +149,12 @@ def plot_lorenz_GP(xlor, ylor,
         s += 'accounts for\n{:.1%} of the {}.'.format(Px, y_measure)
         ax.text(0.47, 0.96, s, 
                 ha='center',va='center',
-                style='italic', fontsize=11, wrap=True);
+                style='italic', fontsize=11, wrap=True)
             
     ax.xaxis.set_major_formatter(PercentFormatter(1))
     ax.yaxis.set_major_formatter(PercentFormatter(1))
 
-    ax.set_title('Lorenz-Gini-P curve ({})'.format(N));
+    ax.set_title('Lorenz-Gini-P curve ({})'.format(N))
     ax.set_xlabel('Cummuative share of {}'.format(x_pop))
     ax.set_ylabel('Cummuative share of {}'.format(y_measure))
     
@@ -162,31 +162,6 @@ def plot_lorenz_GP(xlor, ylor,
         pic = os.path.basename(save_as).split('.')[0] + '.' + format
         fname = os.path.join(DIR_IMG, pic)
         plt.savefig(fname, transparent=True)
-
-
-def save_file(fname, ext, s, replace=True):
-    # check if fname has an extension:
-    x = get_file_ext(fname)
-    
-    if x:
-        outfile = fname.split(x)[0] + '.' + ext
-    else:
-        outfile = fname + '.' + ext
-    
-    if replace:
-        if os.path.exists(outfile):
-            os.remove(outfile)
-
-    if isinstance(s, dict):
-        import json
-
-        with open(outfile, 'w') as fw:
-            json.dump(s, fw)
-    else:
-        if len(s):
-            with open(outfile, 'w') as f:
-                f.write(s)
-    return
 
 
 def is_lab_notebook():

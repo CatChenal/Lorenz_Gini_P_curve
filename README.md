@@ -41,4 +41,18 @@ Since A+B = 0.5, **G = 2A**
 
 ### Hope this helps!
 
-#### TODO: Refine plotting function to enable args as style dicts for plot text and figure save options.
+You can view the code in `./lgp_curve/LorenzGiniP.py`.  
+The [Lorenz_Gini_P_curve notebook](./notebooks/Lorenz_Gini_P_curve.ipynb) has the coding details (imports, calls, etc.).
+The Gini ratio was calculated using interpolation and integration: it will likely not be equal to the analyticaly calculated ratio; my guesstimate for the discrepancy is 0.05 to 0.1.
+
+### Dependencies:  
+* python 3.
+* numpy
+* scipy (for .integrate.trapz)
+* pandas
+* matplotlib
+
+#### TODO: 
+* Refine plotting function to pass style dict for plot text
+* Refine plotting function to pass style dict for figure save options.
+* Check discrepancy of Gini value viz analytical solution
